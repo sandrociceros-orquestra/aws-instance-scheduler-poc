@@ -1,0 +1,26 @@
+
+AWSTemplateFormatVersion: 2010-09-09 
+Metadata:
+  'AWS::CloudFormation::Designer': {}
+Resources:
+  BrazilOfficehours:
+    Type: 'Custom::ServiceInstanceSchedule'
+    Properties:
+      Name: BRA-Default-OfficeHours
+      NoStackPrefix: 'True'
+      Description: Default Brazilian States Office hours
+      ServiceToken: >-
+        arn:aws:lambda:us-east-1:$AWS_ACCOUNT_ID:function:$CFNSTACK_SCHEDULER_NAME-InstanceSchedulerMain
+      Enforced: 'True'
+      Hibernate: 'True'
+      Timezone: America/Sao_Paulo
+      Periods:
+        - Description: Opening hours on weekdays
+          BeginTime: '06:00'
+          EndTime: '06:30'
+          WeekDays: Mon-Fri
+        - Description: Opening hours in weekend
+          BeginTime: '06:10'
+          EndTime: '06:40'
+          WeekDays: Sat-Sun
+  
